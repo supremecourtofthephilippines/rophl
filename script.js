@@ -21,8 +21,8 @@ function render() {
   const start = (page - 1) * size;
 
   rows.innerHTML = filtered.slice(start, start + size).map((rule) => `
-    <tr><td><a href="document.html?doc=${encodeURIComponent(rule.id)}">${rule.title}</a></td>
-    <td>${rule.type}</td><td><a href="document.html?doc=${encodeURIComponent(rule.id)}">${rule.number}</a></td></tr>`).join('');
+    <tr><td><a href="pdf.html?doc=${encodeURIComponent(rule.id)}">${rule.title}</a></td>
+    <td>${rule.type}</td><td><a href="pdf.html?doc=${encodeURIComponent(rule.id)}">${rule.number}</a></td></tr>`).join('');
   summary.textContent = filtered.length
     ? `Showing ${start + 1} to ${Math.min(start + size, filtered.length)} of ${filtered.length} entries`
     : 'No matching entries';
