@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A roleplay reference site for Philippine Rules of Court practice.">
+  <title>Rules of Court | Republic of Philippines Roleplay</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="topbar container">
+      <a class="brand" href="#top" aria-label="Republic of Philippines Roleplay home">
+        <span class="seal" aria-hidden="true">⚖</span>
+        <span>
+          <strong>Republic of Philippines</strong>
+          <small>Roleplay Judiciary</small>
+        </span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
+      <nav id="main-nav" class="main-nav" aria-label="Main navigation">
+        <a href="#rules">Rules</a>
+        <a href="#civil">Civil</a>
+        <a href="#criminal">Criminal</a>
+        <a href="#evidence">Evidence</a>
+        <a href="#resources">Resources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="notice" role="note">
+      <div class="container">
+        <strong>Roleplay reference only.</strong>
+        This fictionalized website is not affiliated with or endorsed by the Supreme Court of the Philippines.
+        It uses abridged headings and adapted wording for roleplay; consult official issuances for real proceedings.
+      </div>
+    </section>
+
+    <section class="hero">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="#top">Home</a><span>/</span><span>Rules of Court</span>
+        </nav>
+        <p class="eyebrow">Official-style roleplay reference</p>
+        <h1>Rules of Court</h1>
+        <p class="lede">An organized reference for civil procedure, special proceedings, criminal procedure, evidence, and professional rules in fictional Philippine roleplay.</p>
+      </div>
+    </section>
+
+    <section class="search-section" id="rules">
+      <div class="container">
+        <label for="rule-search">Search the rules</label>
+        <div class="search-box">
+          <input id="rule-search" type="search" placeholder="Search rule, title, or subject…" autocomplete="off">
+          <span id="search-count" aria-live="polite">0 rules</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="content container">
+      <aside class="sidebar" aria-label="Rules index">
+        <h2>Rules of Court</h2>
+        <a href="#civil"><span>1</span>Civil Procedure</a>
+        <a href="#special"><span>2</span>Special Proceedings</a>
+        <a href="#criminal"><span>3</span>Criminal Procedure</a>
+        <a href="#evidence"><span>4</span>Evidence</a>
+        <a href="#other"><span>5</span>Other Provisions</a>
+      </aside>
+
+      <div class="rule-panels">
+        <article class="panel" id="civil" data-search="civil procedure rules pleading summons venue party joinder trial judgment appeal">
+          <div class="panel-heading"><p>PART I</p><h2>Civil Procedure</h2><span>Rules 1–71</span></div>
+          <div class="rule-grid">
+            <a href="#rule-1"><strong>Rule 1</strong><span>General provisions</span></a>
+            <a href="#rule-7"><strong>Rules 7–10</strong><span>Pleadings and parties</span></a>
+            <a href="#rule-14"><strong>Rules 14–15</strong><span>Summons and motions</span></a>
+            <a href="#rule-18"><strong>Rules 18–20</strong><span>Pre-trial and trial</span></a>
+            <a href="#rule-36"><strong>Rules 36–39</strong><span>Judgments and relief</span></a>
+            <a href="#rule-40"><strong>Rules 40–56</strong><span>Appeals and special civil actions</span></a>
+          </div>
+        </article>
+
+        <article class="panel" id="special" data-search="special proceedings settlement estate guardianship adoption escheat">
+          <div class="panel-heading"><p>PART II</p><h2>Special Proceedings</h2><span>Rules 72–109</span></div>
+          <div class="rule-grid">
+            <a href="#rule-72"><strong>Rules 72–73</strong><span>Scope and settlement of estates</span></a>
+            <a href="#rule-92"><strong>Rules 92–96</strong><span>Guardians and custody</span></a>
+            <a href="#rule-103"><strong>Rules 103–109</strong><span>Escheat and related matters</span></a>
+          </div>
+        </article>
+
+        <article class="panel" id="criminal" data-search="criminal procedure prosecution information arrest bail trial judgment appeal">
+          <div class="panel-heading"><p>PART III</p><h2>Criminal Procedure</h2><span>Rules 110–127</span></div>
+          <div class="rule-grid">
+            <a href="#rule-110"><strong>Rules 110–113</strong><span>Prosecution and arrest</span></a>
+            <a href="#rule-114"><strong>Rules 114–116</strong><span>Bail and preliminary investigation</span></a>
+            <a href="#rule-118"><strong>Rules 118–122</strong><span>Arraignment and trial</span></a>
+            <a href="#rule-124"><strong>Rules 124–127</strong><span>Judgment and appeals</span></a>
+          </div>
+        </article>
+
+        <article class="panel" id="evidence" data-search="evidence admissibility witnesses documentary object evidence examination">
+          <div class="panel-heading"><p>PART IV</p><h2>Evidence</h2><span>Rules 128–134</span></div>
+          <div class="rule-grid">
+            <a href="#rule-128"><strong>Rules 128–130</strong><span>General rules and object evidence</span></a>
+            <a href="#rule-131"><strong>Rules 131–132</strong><span>Presumptions and documentary evidence</span></a>
+            <a href="#rule-133"><strong>Rule 133</strong><span>Weight and sufficiency</span></a>
+          </div>
+        </article>
+
+        <article class="panel" id="other" data-search="attorneys admission bar discipline fees costs court officers">
+          <div class="panel-heading"><p>PART V</p><h2>Other Provisions</h2><span>Rules 135–144</span></div>
+          <div class="rule-grid">
+            <a href="#rule-135"><strong>Rules 135–137</strong><span>Court officers and duties</span></a>
+            <a href="#rule-138"><strong>Rules 138–139</strong><span>Attorneys and discipline</span></a>
+            <a href="#rule-141"><strong>Rules 141–144</strong><span>Fees, costs, and effectivity</span></a>
+          </div>
+        </article>
+
+        <article class="panel resources" id="resources" data-search="amparo habeas data environmental notarization judicial dispute resolution">
+          <div class="panel-heading"><p>REFERENCE</p><h2>Related Roleplay Rules</h2><span>Selected</span></div>
+          <div class="rule-grid">
+            <a href="#amparo"><strong>Special Writs</strong><span>Amparo and habeas data</span></a>
+            <a href="#environment"><strong>Environmental</strong><span>Environmental cases</span></a>
+            <a href="#notarial"><strong>Notarial</strong><span>Notarial practice</span></a>
+            <a href="#e-dispute"><strong>Dispute Resolution</strong><span>JDR and remote proceedings</span></a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div><strong>Republic of Philippines Roleplay Judiciary</strong><p>Fictional Rules of Court resource.</p></div>
+      <nav aria-label="Footer navigation"><a href="#rules">Rules</a><a href="#resources">Resources</a><a href="#top">Back to top</a></nav>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
