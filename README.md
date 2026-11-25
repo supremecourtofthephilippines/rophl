@@ -1,10 +1,10 @@
 # Republic of the Philippines Roleplay — 2026 Rules
 
-The document library includes the selected 2026 roleplay issuances and roleplay adaptations for Civil Procedure, Criminal Procedure, Evidence, Court Administration, Special Proceedings, and Professional Rules.
+An organized roleplay library featuring longer compilations titled as 2026 Rules. The entries cover Civil Procedure, Criminal Procedure, Evidence, Special Proceedings, Special Writs, Court Administration, Attorneys and Bar Matters, Notarial Practice, Environmental Cases, and Judicial Dispute Resolution.
 
-## Markings
+## Disclaimer
 
-Every document number is marked as 2026 or RP-2026. The site clearly identifies all documents as fictional roleplay material and not official Supreme Court publications.
+This is unofficial fictional roleplay material, not a Supreme Court publication and not legal advice. All issuances are original abridged adaptations.
 
 ## Run locally
 

@@ -4,16 +4,14 @@ const rule = window.ROLEPLAY_RULES.find((item) => item.id === params.get('doc'))
 if (!rule) {
   document.body.textContent = 'Document not found. Return to the Rules of Court index.';
 } else {
-  document.title = `${rule.title} — Roleplay PDF`;
+  document.title = `${rule.title} — 2026 Roleplay PDF`;
 
-  // Build a small self-contained PDF so the browser opens the document itself,
-  // rather than showing an HTML document page first.
   const clean = (value) => String(value)
     .replace(/[’‘]/g, "'").replace(/[“”]/g, '"')
     .replace(/[–—]/g, '-').replace(/…/g, '...')
     .replace(/[^\x20-\x7E]/g, '');
   const escapePdf = (value) => clean(value).replace(/\\/g, '\\\\').replace(/\(/g, '\\(').replace(/\)/g, '\\)');
-  const wrap = (text, max = 88) => {
+  const wrap = (text, max = 78) => {
     const words = clean(text).split(/\s+/);
     const lines = [];
     let line = '';
@@ -27,27 +25,42 @@ if (!rule) {
 
   const pageLines = [[]];
   let current = pageLines[0];
-  const add = (text, style = 'body', gap = 17) => {
-    const chunks = wrap(text, style === 'title' ? 54 : 88);
+  let lineCount = 0;
+
+  const add = (text, style = 'body') => {
+    const chunks = wrap(text, style === 'title' ? 52 : 78);
     for (const line of chunks) {
-      if (current.length >= 44) { current = []; pageLines.push(current); }
+      if (lineCount >= 42) {
+        current = [];
+        pageLines.push(current);
+        lineCount = 0;
+      }
       current.push({ text: line, style });
+      lineCount += style === 'title' ? 2 : 1;
     }
-    if (gap && current.length < 45) current.push({ text: '', style: 'gap' });
+    if (lineCount < 42) {
+      if (lineCount >= 42) {
+        current = [];
+        pageLines.push(current);
+        lineCount = 0;
+      }
+      current.push({ text: '', style: 'gap' });
+      lineCount += 1;
+    }
   };
 
-  add('REPUBLIC OF THE PHILIPPINES — ROLEPLAY JUDICIARY', 'institution', 8);
-  add('FICTIONAL DOCUMENT | FOR ROLEPLAY PURPOSES ONLY', 'notice', 28);
-  add(rule.category.toUpperCase(), 'section', 18);
-  add(`A.M. No. ${rule.number}`, 'case', 18);
-  add(rule.title.toUpperCase(), 'title', 8);
-  add('ROLEPLAY ADAPTATION — NOT AN OFFICIAL ISSUANCE', 'notice', 25);
-  add(rule.intro, 'body', 20);
-  rule.sections.forEach((section, index) => {
-    if (index % 2 === 0) add(`SECTION ${Math.floor(index / 2) + 1}. ${section}.`, 'heading', 5);
-    else add(section, 'body', 17);
-  });
-  add('This document is an original, simplified fictional adaptation. It is not legal advice, does not reproduce an official rule in full, and has no force in real proceedings.', 'disclaimer', 0);
+  add('REPUBLIC OF THE PHILIPPINES - ROLEPLAY JUDICIARY', 'institution');
+  add('FICTIONAL DOCUMENT - FOR 2026 ROLEPLAY PURPOSES ONLY', 'notice');
+  add(rule.category.toUpperCase(), 'section');
+  add(`A.M. No. ${rule.number}`, 'case');
+  add(rule.title.toUpperCase(), 'title');
+  add('ORIGINAL ROLEPLAY COMPILATION - NOT AN OFFICIAL ISSUANCE', 'notice');
+  add(rule.intro, 'body');
+  for (const section of rule.sections) {
+    const heading = /^Part [IVX]+\.|^Section/i.test(section);
+    add(section, heading ? 'heading' : 'body');
+  }
+  add('This 2026 document is an original, fictional roleplay adaptation. It is not legal advice and has no effect in real proceedings.', 'disclaimer');
 
   const objects = [];
   const addObject = (text) => { objects.push(text); return objects.length; };
@@ -58,30 +71,31 @@ if (!rule) {
   const pageIds = [];
 
   pageLines.forEach((lines, pageIndex) => {
-    let y = 755;
+    let y = 745;
     let commands = '0.55 w 54 42 487 708 re S\n';
-    commands += 'BT /F2 9 Tf 0.35 g 72 725 Td (ROLEPLAY REFERENCE - NOT AN OFFICIAL COURT ISSUANCE) Tj ET\n';
+    commands += 'BT /F2 9 Tf 0.35 g 72 720 Td (2026 ROLEPLAY REFERENCE - NOT AN OFFICIAL COURT ISSUANCE) Tj ET\n';
     for (const item of lines) {
-      if (item.style === 'gap') { y -= 8; continue; }
+      if (item.style === 'gap') { y -= 7; continue; }
       const config = {
-        institution: { font: 'F2', size: 12, color: '0 g', x: 297, align: true },
-        notice: { font: 'F2', size: 9, color: '0.35 g', x: 297, align: true },
-        section: { font: 'F2', size: 11, color: '0 g', x: 297, align: true },
-        case: { font: 'F2', size: 11, color: '0 g', x: 297, align: true },
-        title: { font: 'F2', size: 14, color: '0 g', x: 297, align: true },
-        heading: { font: 'F2', size: 11, color: '0 g', x: 72, align: false },
-        disclaimer: { font: 'F1', size: 9, color: '0.25 g', x: 72, align: false },
-        body: { font: 'F1', size: 11, color: '0 g', x: 72, align: false }
+        institution: { font: 'F2', size: 11, color: '0 g', align: true },
+        notice: { font: 'F2', size: 8, color: '0.35 g', align: true },
+        section: { font: 'F2', size: 10, color: '0 g', align: true },
+        case: { font: 'F2', size: 11, color: '0 g', align: true },
+        title: { font: 'F2', size: 13, color: '0 g', align: true },
+        heading: { font: 'F2', size: 10, color: '0 g', align: false },
+        disclaimer: { font: 'F1', size: 8, color: '0.25 g', align: false },
+        body: { font: 'F1', size: 10, color: '0 g', align: false }
       }[item.style];
-      const text = escapePdf(item.text);
+      let x = 72;
       if (config.align) {
         const estimatedWidth = item.text.length * config.size * 0.48;
-        config.x = Math.max(72, (595 - estimatedWidth) / 2);
+        x = Math.max(72, (595 - estimatedWidth) / 2);
       }
-      commands += `BT /${config.font} ${config.size} Tf ${config.color} ${config.x.toFixed(1)} ${y.toFixed(1)} Td (${text}) Tj ET\n`;
-      y -= item.style === 'title' ? 24 : item.style === 'heading' ? 18 : 15;
+      const text = escapePdf(item.text);
+      commands += `BT /${config.font} ${config.size} Tf ${config.color} ${x.toFixed(1)} ${y.toFixed(1)} Td (${text}) Tj ET\n`;
+      y -= item.style === 'title' ? 20 : item.style === 'heading' ? 16 : 13;
     }
-    commands += `BT /F1 9 Tf 0.3 g 260 27 Td (Page ${pageIndex + 1} of ${pageLines.length}) Tj ET\n`;
+    commands += `BT /F1 8 Tf 0.3 g 265 27 Td (Page ${pageIndex + 1} of ${pageLines.length}) Tj ET\n`;
     const streamId = addObject(`<< /Length ${commands.length} >>\nstream\n${commands}endstream`);
     const pageId = addObject(`<< /Type /Page /Parent ${pagesId} 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 ${fontRegularId} 0 R /F2 ${fontBoldId} 0 R >> >> /Contents ${streamId} 0 R >>`);
     pageIds.push(pageId);
@@ -90,7 +104,7 @@ if (!rule) {
   objects[catalogId - 1] = `<< /Type /Catalog /Pages ${pagesId} 0 R >>`;
   objects[pagesId - 1] = `<< /Type /Pages /Kids [${pageIds.map((id) => `${id} 0 R`).join(' ')}] /Count ${pageIds.length} >>`;
 
-  let pdf = '%PDF-1.4\n%RP01\n';
+  let pdf = '%PDF-1.4\n%RP2026\n';
   const offsets = [0];
   objects.forEach((object, index) => {
     offsets.push(pdf.length);
